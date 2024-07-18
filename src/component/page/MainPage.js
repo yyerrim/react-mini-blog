@@ -33,7 +33,7 @@ function MainPage(props) {
       const url = 'http://127.0.0.1:8080/post-list';
       const res = await fetch(url);
       const data = await res.json();
-      setData(data);
+      setData(data.list);
     }
     get();
   }, []);
