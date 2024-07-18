@@ -40,7 +40,7 @@ function MainPage(props) {
 
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const page = params.get('page');
+  const page = params.get('page') || 1;
 
   useEffect(() => {
     async function get() {
@@ -53,12 +53,14 @@ function MainPage(props) {
           startPage: data.startPage, endPage: data.endPage, totalCount: data.totalCount, totalPage: data.totalPage
         }
       );
+      const p = [];
       for (let i = data.startPage; i <= data.endPage; i++) {
-        pagination.push(<Link to={`/?page=${i}`}> {i}</Link >)
+        p.push(<Link to={`/?page=${i}`}> {i}</Link >)
       }
+      setPagination(p);
     }
     get();
-  }, []);
+  }, [page]);
 
   return (
     <Wrapper>
