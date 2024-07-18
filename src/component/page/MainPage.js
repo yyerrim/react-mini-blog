@@ -24,6 +24,7 @@ const Container = styled.div`
 
 function MainPage(props) {
   const navigate = useNavigate();
+  // useNavigate : NavLink, Link와 같은 역할
 
   return (
     <Wrapper>
