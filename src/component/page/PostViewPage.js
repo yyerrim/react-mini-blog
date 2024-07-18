@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import CommentList from '../list/CommentList';
 import TextInput from '../ui/TextInput';
 import Button from '../ui/Button';
-import data from '../../data.json';
+// import data from '../../data.json';
 
 const Wrapper = styled.div`
   padding: 16px;
@@ -50,9 +50,19 @@ function PostViewPage(props) {
   const navigate = useNavigate();
   const { postId } = useParams();
 
-  const post = data.find((item) => {
-    return item.id == postId;
-  });
+  // const post = data.find((item) => {
+  //   return item.id == postId;
+  // });
+  const [post, setPost] = useState({}); // 게시글 1개를 보여주는 컴포넌트이기 때문에 객체 {}
+  useEffect(() => {
+    async function get() {
+      const url = `http://127.0.0.1:8080/post/${postId}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      setPost(data);
+    }
+    get();
+  }, []);
 
   const [comment, setComment] = useState('');
 
