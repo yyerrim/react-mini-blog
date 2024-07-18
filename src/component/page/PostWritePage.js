@@ -50,6 +50,21 @@ function PostWritePage(props) {
         <Button
           title='글 작성하기'
           onClick={() => {
+            async function send() {
+              const url = 'http://127.0.0.1:8080/post-write';
+              // Get 방식 : const res = await fetch(url);
+              // Post 방식이 될려면 객체도 적어줘야함
+              const res = await fetch(url, {
+                method: 'post',
+                headers: {
+                  'content-type': 'application/json'
+                },
+                body: JSON.stringify({ title: title, desc: content })
+              });
+              // headers : json으로 던지기 위해 사용 / body : @@@@@
+              const data = await res.json();
+            }
+            send();
             navigate('/');
           }}
         />
