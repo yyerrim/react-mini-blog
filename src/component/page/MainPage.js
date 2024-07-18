@@ -31,32 +31,32 @@ function MainPage(props) {
   useEffect(() => {
     async function get() {
       const url = 'http://127.0.0.1:8080/post-list';
-      const res = await fetch(url));
-  const data = await res.json();
-  setData(data);
-}
-get();
+      const res = await fetch(url);
+      const data = await res.json();
+      setData(data);
+    }
+    get();
   }, []);
 
-return (
-  <Wrapper>
-    <Container>
-      <Button
-        title='글 작성하기'
-        onClick={() => {
-          navigate('/post-write');
-        }}
-      />
+  return (
+    <Wrapper>
+      <Container>
+        <Button
+          title='글 작성하기'
+          onClick={() => {
+            navigate('/post-write');
+          }}
+        />
 
-      <PostList
-        posts={data}
-        onClickItem={(item) => {
-          navigate(`/post/${item.id}`);
-        }}
-      />
-    </Container>
-  </Wrapper>
-);
+        <PostList
+          posts={data}
+          onClickItem={(item) => {
+            navigate(`/post/${item.id}`);
+          }}
+        />
+      </Container>
+    </Wrapper>
+  );
 }
 
 export default MainPage;
