@@ -94,7 +94,18 @@ function PostViewPage(props) {
         />
         <Button
           title='댓글 작성하기'
-          onClick={() => {
+          onClick={async () => {
+            const url = 'http://127.0.0.1:8080/comment-write';
+            const res = await fetch(url, {
+              method: 'post',
+              headers: {
+                'content-type': 'application/json'
+                // 'content-Type': 'application/json'
+                // ContentType: 'application/json'
+              },
+              body: JSON.stringify({ content: comment })
+            });
+            const data = await res.json();
             navigate('/');
           }}
         />
