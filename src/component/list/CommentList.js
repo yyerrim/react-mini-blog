@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   }
 `;
 function CommentList(props) {
-  const {comments} = props;
+  const { comments } = props;
 
   return (
     <Wrapper>
@@ -21,7 +21,7 @@ function CommentList(props) {
           return (
             <CommentListItem
               key={comment.id}
-              comment={comment} 
+              comment={comment}
             />
           );
         })

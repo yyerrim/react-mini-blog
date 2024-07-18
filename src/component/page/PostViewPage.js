@@ -77,11 +77,13 @@ function PostViewPage(props) {
         />
         <PostContainer>
           <TitleText>{post.title}</TitleText>
-          <ContentText>{post.content}</ContentText>
+          {/* <ContentText>{post.content}</ContentText> */}
+          <ContentText>{post.desc}</ContentText>
         </PostContainer>
 
         <CommentLabel>댓글</CommentLabel>
-        <CommentList comments={post.comments} />
+        {/* <CommentList comments={post.comments} /> */}
+        {/* 지금 comments가 없는 상황이라 CommentList.js에서 comments.map 사용불가 */}
 
         <TextInput
           height={40}
