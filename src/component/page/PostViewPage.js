@@ -76,6 +76,14 @@ function PostViewPage(props) {
             navigate('/');
           }}
         />
+        <Button
+          title='삭제'
+          onClick={async () => {
+            const url = `http://127.0.0.1:8080/post-remove?postId=${postId}`;
+            const res = await fetch(url);
+            const data = await res.json();
+          }}
+        />
         <PostContainer>
           <TitleText>{post.title}</TitleText>
           {/* <ContentText>{post.content}</ContentText> */}
