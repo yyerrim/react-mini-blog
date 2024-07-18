@@ -63,9 +63,14 @@ function PostWritePage(props) {
               });
               // headers : json으로 던지기 위해 사용 / body : @@@@@
               const data = await res.json();
+              if (data.code === 200) {
+                alert(data.msg);
+                navigate('/');
+              } else {
+                alert('다시 입력해주세요.');
+              }
             }
             send();
-            navigate('/');
           }}
         />
       </Container>
