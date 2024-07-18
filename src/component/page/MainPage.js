@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import PostList from '../list/PostList';
 import Button from '../ui/Button';
@@ -28,12 +28,34 @@ function MainPage(props) {
   // useNavigate : NavLink, Link와 같은 역할
 
   const [data, setData] = useState([]);
+
+  // const [pageInfo, setPageInfo] = useState({});
+  const [pageInfo, setPageInfo] = useState(
+    {
+      startPage: 0, endPage: 0, totalCount: 0, totalPage: 0
+    }
+  ); // 다른 개발자들을 위해서 이러한 정보 적어주는것도 좋음
+
+  const [pagination, setPagination] = useState([]);
+
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const page = params.get('page');
+
   useEffect(() => {
     async function get() {
-      const url = 'http://127.0.0.1:8080/post-list';
+      const url = `http://127.0.0.1:8080/post-list?page=${page}`;
       const res = await fetch(url);
       const data = await res.json();
       setData(data.list);
+      setPageInfo(
+        {
+          startPage: data.startPage, endPage: data.endPage, totalCount: data.totalCount, totalPage: data.totalPage
+        }
+      );
+      for (let i = data.startPage; i <= data.endPage; i++) {
+        pagination.push(<Link to={`/?page=${i}`}> {i}</Link >)
+      }
     }
     get();
   }, []);
@@ -54,6 +76,7 @@ function MainPage(props) {
             navigate(`/post/${item.id}`);
           }}
         />
+        <div>{pagination}</div>
       </Container>
     </Wrapper>
   );
