@@ -38,6 +38,8 @@ function MainPage(props) {
 
   const [pagination, setPagination] = useState([]);
 
+  const [search, setSearch] = useState('');
+
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const page = params.get('page') || 1;
@@ -72,12 +74,28 @@ function MainPage(props) {
           }}
         />
 
+        <input type='text'
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}></input>
+        <button
+          onClick={async () => {
+            const url = `http://127.0.0.1:8080/post-list?search=${search}`;
+            const res = await fetch(url);
+            const data = await res.json();
+            setData(data.list);
+          }}>
+          검색
+        </button>
+
         <PostList
           posts={data}
           onClickItem={(item) => {
             navigate(`/post/${item.id}`);
           }}
         />
+
         <div>{pagination}</div>
       </Container>
     </Wrapper>
