@@ -102,7 +102,7 @@ function PostViewPage(props) {
                 // 'content-Type': 'application/json'
                 // ContentType: 'application/json'
               },
-              body: JSON.stringify({ content: comment })
+              body: JSON.stringify({ postId: postId, content: comment })
             });
             const data = await res.json();
             if (data.code === 200) {
