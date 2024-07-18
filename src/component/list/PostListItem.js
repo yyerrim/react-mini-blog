@@ -15,9 +15,10 @@ const TitleText = styled.p`
 
 function PostListItem(props) {
   const { post, onClick } = props;
+  // console.dir(post); // 댓글 어떻게 불러오는지 확인하기 위해 콘솔에 찍어보기
   return (
     <Wrapper onClick={onClick}>
-      <TitleText>{post.title}</TitleText>
+      <TitleText>{post.title} ({post.comments.length})</TitleText>
     </Wrapper>
   );
 }
