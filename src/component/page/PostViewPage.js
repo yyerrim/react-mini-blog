@@ -54,6 +54,7 @@ function PostViewPage(props) {
   //   return item.id == postId;
   // });
   const [post, setPost] = useState({}); // 게시글 1개를 보여주는 컴포넌트이기 때문에 객체 {}
+  const [change, setChange] = useState(true);
   useEffect(() => {
     async function get() {
       const url = `http://127.0.0.1:8080/post/${postId}`;
@@ -62,7 +63,7 @@ function PostViewPage(props) {
       setPost(data);
     }
     get();
-  }, []);
+  }, [change]);
 
   const [comment, setComment] = useState('');
 
@@ -106,7 +107,9 @@ function PostViewPage(props) {
             });
             const data = await res.json();
             if (data.code === 200) {
-              navigate('/');
+              setChange(!change);
+              setComment('');
+              // navigate('/');
             }
           }}
         />
