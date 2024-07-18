@@ -106,7 +106,9 @@ function PostViewPage(props) {
               body: JSON.stringify({ content: comment })
             });
             const data = await res.json();
-            navigate('/');
+            if (data.code === 200) {
+              navigate('/');
+            }
           }}
         />
       </Container>
